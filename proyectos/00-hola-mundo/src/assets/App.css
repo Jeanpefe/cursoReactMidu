@@ -1,0 +1,41 @@
+
+.x_card {
+    background-color: lightblue;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    background-color: rgb(22, 24, 28);
+}
+
+.x_card__info {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+}
+
+.x_card__image {
+    width: 3.5rem;
+    border-radius: 2rem;
+}
+
+.x_card__text {
+    display: flex;
+    gap: 0.2rem;
+    flex-direction: column;
+}
+
+.x_card__name {
+    color: white;
+}
+
+.x_card__username {
+    color: grey;
+}
+.x_card__follow {
+    border-radius: 1rem;
+    border: 0px;
+    width: 5rem;
+    height: 2rem;
+    font-family: system-ui;
+    font-weight: bold;
+}
