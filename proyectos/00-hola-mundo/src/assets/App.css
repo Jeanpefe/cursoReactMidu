@@ -1,9 +1,9 @@
 
 .x_card {
     display: flex;
-    gap: 2rem;
+    width: 18rem;
     align-items: center;
-    padding-bottom: 1.2rem;
+    justify-content: space-between;
 }
 
 .x_card__info {
@@ -30,6 +30,7 @@
 .x_card__username {
     color: grey;
 }
+
 .x_card__follow {
     border-radius: 1rem;
     border: 0px;
