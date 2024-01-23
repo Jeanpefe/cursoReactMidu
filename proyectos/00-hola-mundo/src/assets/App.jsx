@@ -3,29 +3,29 @@ import { TwitterFollowCard } from './TwitterFollowCard.jsx'
 
 export function App () {
     const formatUserName = (userName) => `@${userName}`
-    const formattedUserName = <span>@Jeanpefe</span>
+
     return (
         <section className='App'>
             <TwitterFollowCard 
-                formattedUserName={formattedUserName}
+                formatUserName={formatUserName}
                 isFollowing={true} 
-                userName="Jeanpefe" 
-                name="Jesús Ángel" 
-            />
+                userName="Jeanpefe">
+                Jesús Ángel
+            </TwitterFollowCard> 
             
             <TwitterFollowCard 
-                formattedUserName={formattedUserName}
+                formatUserName={formatUserName}
                 isFollowing={false} 
-                userName="paula1610" 
-                name="Paula" 
-            />
-            
+                userName="paula1610">
+                paula1610
+            </TwitterFollowCard>
+
             <TwitterFollowCard 
-                formattedUserName={formattedUserName}
+                formatUserName={formatUserName}
                 isFollowing={true} 
-                userName="snakeyesmp" 
-                name="Snakeyesmp" 
-            />
+                userName="snakeyesmp">
+                Snakeyesmp
+            </TwitterFollowCard>
         </section>
     )
 }
