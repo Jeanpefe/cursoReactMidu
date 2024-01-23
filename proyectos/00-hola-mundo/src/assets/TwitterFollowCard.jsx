@@ -1,11 +1,11 @@
-export function TwitterFollowCard ({ formatUserName, userName, name, isFollowing }) {
+export function TwitterFollowCard ({ formattedUserName, userName, name, isFollowing }) {
     return (
     <article className="x_card">
         <header className='x_card__info'>
             <img className="x_card__image" alt="avatar de Jeanepfe" src={`https://unavatar.io/${userName}`} />
             <div className="x_card__text">
                 <strong className="x_card__name">{name}</strong>
-                <span className="x_card__username">{formatUserName(userName)}</span>
+                <span className="x_card__username">{formattedUserName}</span>
             </div>
         </header>
 
