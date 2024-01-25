@@ -1,7 +1,7 @@
 
 .x_card {
     display: flex;
-    width: 18rem;
+    width: 20rem;
     align-items: center;
     justify-content: space-between;
 }
@@ -42,8 +42,10 @@
 }
 
 .x_card__follow--following {
-	border: 1px solid red;
-	background: red;
+	border: 1px solid lightgray;
+	background: transparent;
+	color: white;
+	width: 120px;
 }
 
 .x_card__follow:hover {
@@ -51,5 +53,19 @@
 }
 
 .x_card__follow--following:hover {
-	background: red;
+	border: 1px solid red;
+	color: red;
+	background-color: transparent;
+}
+
+.x_card__follow--following:hover .x_card__stopFollow {
+	display: block;
+}
+
+.x_card__follow--following:hover .x_card__text {
+	display: none;
+}
+
+.x_card__stopFollow {
+	display: none;
 }
