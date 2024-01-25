@@ -9,24 +9,41 @@ export function App () {
 	const jeanpefe = {userName: "Jeanpefe", formatUserName: formatUserName, initialIsFollowing: isFollowing} //No suele ser buena practica, por temas de rerenderizado y comprension
 	//Cuando queremos pasar una prop para inicializar un estado es buena practica poner initial delante
 	//
+
+	const users = [
+		{
+			userName: "Jeanpefe",
+			name: "Jesús Ángel",
+			isFollowing: true
+		},
+		{
+			userName: "paula1610",
+			name: "paula1610",
+			isFollowing: false
+		},
+		{
+			userName: "snakeyesmp",
+			name: "Snakeyesmp",
+			isFollowing: true
+		}
+	]
+
     return (
         <section className='App'>
-            <TwitterFollowCard {...jeanpefe}>
-                Jesús Ángel
-            </TwitterFollowCard> 
-            
-            <TwitterFollowCard 
-                formatUserName={formatUserName}
-                userName="paula1610">
-                paula1610
-            </TwitterFollowCard>
-
-            <TwitterFollowCard 
-                formatUserName={formatUserName}
-                userName="snakeyesmp">
-                Snakeyesmp
-            </TwitterFollowCard>
-			<button onClick={() => setIsFollowing(!isFollowing)} >Intento cambiar el estado</button>
+			{
+				users.map(user => {
+					const { userName, name, isFollowing } = user 
+					return (
+						<TwitterFollowCard 
+							userName={userName} 
+							isFollowing={isFollowing}
+							formatUserName={formatUserName}
+						>
+							{name}
+						</TwitterFollowCard>
+					)
+				})
+			}
         </section>
     )
 }
