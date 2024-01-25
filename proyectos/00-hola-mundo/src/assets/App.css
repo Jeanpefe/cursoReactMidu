@@ -33,9 +33,23 @@
 
 .x_card__follow {
     border-radius: 1rem;
+	cursor: pointer;
     border: 0px;
     width: 5rem;
     height: 2rem;
     font-family: system-ui;
     font-weight: bold;
+}
+
+.x_card__follow--following {
+	border: 1px solid red;
+	background: red;
+}
+
+.x_card__follow:hover {
+	background-color: lightgray;
+}
+
+.x_card__follow--following:hover {
+	background: red;
 }

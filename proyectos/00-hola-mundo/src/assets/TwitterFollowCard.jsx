@@ -1,5 +1,8 @@
 export function TwitterFollowCard ({ children, formatUserName, userName = 'unknown', isFollowing }) {
-    return (
+	const text = isFollowing ? 'Siguiendo' : 'Seguir'
+	const buttonClassName = isFollowing ? 'x_card__follow x_card__follow--following' : 'x_card__follow'
+
+	return (
     <article className="x_card">
         <header className='x_card__info'>
             <img className="x_card__image" alt="avatar de Jeanepfe" src={`https://unavatar.io/${userName}`} />
@@ -10,7 +13,7 @@ export function TwitterFollowCard ({ children, formatUserName, userName = 'unkno
         </header>
 
         <aside className="x_card__aside">
-            <button className="x_card__follow">Seguir</button>
+            <button className={`x_card__follow ${buttonClassName}`}>{text}</button>
         </aside>
     </article>
     )
