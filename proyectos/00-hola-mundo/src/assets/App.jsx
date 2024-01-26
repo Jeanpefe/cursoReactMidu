@@ -35,6 +35,7 @@ export function App () {
 					const { userName, name, isFollowing } = user 
 					return (
 						<TwitterFollowCard 
+							key={userName} //algo que sepamos que es unico, id de bbdd, username,...
 							userName={userName} 
 							isFollowing={isFollowing}
 							formatUserName={formatUserName}
