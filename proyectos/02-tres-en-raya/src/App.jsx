@@ -26,6 +26,9 @@ function App() {
 	const [turn, setTurn] = useState(TURNS.X)
 
 	const updateBoard = (index) => {
+		// no actualizar si ya hay value
+		if (board[index]) return
+		
 		const newBoard = [...board]
 		newBoard[index] = turn
 		setBoard(newBoard)
