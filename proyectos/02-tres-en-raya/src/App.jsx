@@ -6,7 +6,7 @@ const TURNS = {
 }
 
 
-const Square = ( {children, isSelected, updateBoard, index}) => {
+const Square = ({ children, isSelected, updateBoard, index }) => {
 	const className = `square ${isSelected ? 'is-selected' : ''}`
 
 	const handleClick = () => {
@@ -28,7 +28,6 @@ function App() {
 	const updateBoard = (index) => {
 		const newBoard = [...board]
 		newBoard[index] = turn
-		console.log(turn)
 		setBoard(newBoard)
 		console.log(newBoard)
 
@@ -47,6 +46,7 @@ function App() {
 							index={index}
 							updateBoard={updateBoard}
 							>
+								{board[index]}
 							</Square>
 						)
 					})
