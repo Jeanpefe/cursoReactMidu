@@ -67,6 +67,13 @@ function App() {
 			return board[a]
 		}
 	}
+
+	const resetGame = () => {
+		setBoard(Array(9).fill(null))
+		setTurn(TURNS.X)
+		setWinner(null)
+	}
+
 	return (
 		<main className='board'>
 			<h1>Tres en raya</h1>
@@ -106,7 +113,7 @@ function App() {
 								{winner && <Square>{winner}</Square>}
 							</header>
 							<footer>
-								<button>Empezar de nuevo</button>
+								<button onClick={resetGame}>Empezar de nuevo</button>
 							</footer>
 						</div>
 					</section>
