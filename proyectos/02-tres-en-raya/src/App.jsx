@@ -39,7 +39,7 @@ function App() {
 
 	const updateBoard = (index) => {
 		// no actualizar si ya hay value
-		if (board[index]) return
+		if (board[index] || winner) return
 
 		const newBoard = [...board]
 		newBoard[index] = turn
@@ -48,6 +48,12 @@ function App() {
 
 		const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
 		setTurn(newTurn)
+		
+		const newWinner = checkWinner(newBoard)
+		if (newWinner) {
+			setWinner(newWinner)
+			console.log(winner) // La actualizacion del estado es asincrona, este winner no tiene por que ser el que se ha actualizado
+		}
 	}
 
 	const checkWinner = (board) => {
