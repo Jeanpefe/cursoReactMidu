@@ -53,7 +53,14 @@ function App() {
 		if (newWinner) {
 			setWinner(newWinner)
 			console.log(winner) // La actualizacion del estado es asincrona, este winner no tiene por que ser el que se ha actualizado
+		} else if (checkEndGame(newBoard)) {
+			setWinner(false) // empate
 		}
+
+	}
+
+	const checkEndGame = (board) => {
+		return board.every((square) => square !== null)
 	}
 
 	const checkWinner = (board) => {
