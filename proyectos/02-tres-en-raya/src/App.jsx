@@ -1,4 +1,5 @@
 import { useState } from "react";
+import confetti from "canvas-confetti";
 import './App.css'
 const TURNS = {
 	X: 'x',
@@ -51,6 +52,7 @@ function App() {
 		
 		const newWinner = checkWinner(newBoard)
 		if (newWinner) {
+			confetti()
 			setWinner(newWinner)
 			console.log(winner) // La actualizacion del estado es asincrona, este winner no tiene por que ser el que se ha actualizado
 		} else if (checkEndGame(newBoard)) {
