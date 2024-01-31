@@ -8,9 +8,15 @@ import { checkWinner } from "./logic/board.js";
 import { checkEndGame } from "./logic/board.js";
 
 function App() {
-	const [board, setBoard] = useState(Array(9).fill(null))
+	const [board, setBoard] = useState(() => {
+		const boardFromStorage = window.localStorage.getItem('board') // Leer del localStorage es lento, es mejor meterlo aquí que justo encima, ya que de la otra forma se leería cada vez que se renderice algo 
+		return boardFromStorage ? JSON.parse(boardFromStorage) : Array(9).fill(null) 
+	}) // <---- COMENTARIO IMPORTANTE USE STATE: ¡¡¡Nunca puede estar dentro de un if, ni de un else, ni for...!!! Esto es asi porque react lo primero que hace es buscar donde estan los useState y si está dentro de algo de lógica se vuelve loco
 
-	const [turn, setTurn] = useState(TURNS.X) // <---- COMENTARIO IMPORTANTE USE STATE: ¡¡¡Nunca puede estar dentro de un if, ni de un else, ni for...!!! Esto es asi porque react lo primero que hace es buscar donde estan los useState y si está dentro de algo de lógica se vuelve loco
+	const [turn, setTurn] = useState(() => {
+		const boardFromStorage = window.localStorage.getItem('board')
+		return boardFromStorage ? JSON.parse(boardFromStorage) : Array(9).fill(null) 
+	})
 	const [winner, setWinner] = useState(null) // null no winner, false -> empate
 
 	const updateBoard = (index) => {
