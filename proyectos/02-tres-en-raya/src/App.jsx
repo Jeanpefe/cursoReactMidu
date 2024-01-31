@@ -26,13 +26,12 @@ function App() {
 		const newBoard = [...board]
 		newBoard[index] = turn
 		setBoard(newBoard)
-		console.log(newBoard)
 
 		const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
 		setTurn(newTurn)
 		// Guardar partida
 		window.localStorage.setItem('board', JSON.stringify(newBoard)) // hay que guardar un string, no vale el newBoard directamente
-		window.localStorage.setItem('turn', turn)
+		window.localStorage.setItem('turn', newTurn)
 		// Revisar ganador
 		const newWinner = checkWinner(newBoard)
 		if (newWinner) {
