@@ -14,8 +14,8 @@ function App() {
 	}) // <---- COMENTARIO IMPORTANTE USE STATE: ¡¡¡Nunca puede estar dentro de un if, ni de un else, ni for...!!! Esto es asi porque react lo primero que hace es buscar donde estan los useState y si está dentro de algo de lógica se vuelve loco
 
 	const [turn, setTurn] = useState(() => {
-		const boardFromStorage = window.localStorage.getItem('board')
-		return boardFromStorage ? JSON.parse(boardFromStorage) : Array(9).fill(null) 
+		const turnFromStorage = window.localStorage.getItem('turn')
+		return turnFromStorage ? turnFromStorage : TURNS.X
 	})
 	const [winner, setWinner] = useState(null) // null no winner, false -> empate
 
@@ -32,7 +32,7 @@ function App() {
 		setTurn(newTurn)
 		// Guardar partida
 		window.localStorage.setItem('board', JSON.stringify(newBoard)) // hay que guardar un string, no vale el newBoard directamente
-		window.localStorage.setItem('turn', JSON.stringify(turn))
+		window.localStorage.setItem('turn', turn)
 		// Revisar ganador
 		const newWinner = checkWinner(newBoard)
 		if (newWinner) {
@@ -49,6 +49,8 @@ function App() {
 		setBoard(Array(9).fill(null))
 		setTurn(TURNS.X)
 		setWinner(null)
+		window.localStorage.removeItem('board')
+		window.localStorage.removeItem('turn')
 	}
 
 	return (
