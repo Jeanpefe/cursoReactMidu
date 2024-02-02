@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import './App.css'
 import { Square } from "./components/Square.jsx"
@@ -50,6 +50,11 @@ function App() {
 		setWinner(null)
 		resetGameLocalStorage()
 	}
+
+	// El useEffect() va en el cuerpo y se ejecuta siempre cuando se renderiza el componente por primera vez
+	useEffect(() => {
+		console.log("hola") // En este caso se renderiza cada vez que se rerenderiza
+	})
 
 	return (
 		<main className='board'>
