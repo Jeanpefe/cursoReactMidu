@@ -54,7 +54,7 @@ function App() {
 	// El useEffect() va en el cuerpo y se ejecuta siempre cuando se renderiza el componente por primera vez
 	useEffect(() => {
 		console.log("hola") // En este caso se renderiza cada vez que se rerenderiza
-	})
+	}, []) //Si le pasamos array vacio significa que se ejecuta solo la primera vez que se rendeirza
 
 	return (
 		<main className='board'>
