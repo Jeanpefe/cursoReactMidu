@@ -3,8 +3,16 @@ import { useEffect, useState } from "react"
 function App() {
 
   const [enabled, setEnabled] = useState(false)
+  const [position, setPosition] = useState({x: 0, y: 0}) // Como buena practica, inicializar el estado con el tipo de dato que vamos a usar o en su defecto con null
   useEffect(() => {
     console.log("hola")
+    const handleMove = (event) => {
+      const {clientX, clientY} = event
+      setPosition({x: clientX, y: clientY})
+    }
+    if (enabled) {
+      window.addEventListener('pointermove', handleMove)
+    }
   }, [enabled])
   return (
     <main>
@@ -17,7 +25,8 @@ function App() {
         left: -20,
         top: -20,
         width: 40,
-        height: 40
+        height: 40,
+        transform: `translate(${position.x}px, ${position.y}px)`
       }} />
       <button onClick={() => setEnabled(!enabled)}>
           {enabled ? 'Desactivar' : 'Activar'} Seguir el puntero
