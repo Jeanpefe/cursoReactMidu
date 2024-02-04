@@ -17,6 +17,7 @@ function App() {
     return () => {
       window.removeEventListener('pointermove', handleMove)
     } // Se ejecuta siempre que se desmonte el componente (desaparezca) y cada vez que cambie la dependencia
+    //
   }, [enabled])
   return (
     <main>
