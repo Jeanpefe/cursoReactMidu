@@ -11,8 +11,12 @@ function App() {
       setPosition({x: clientX, y: clientY})
     }
     if (enabled) {
-      window.addEventListener('pointermove', handleMove)
+      window.addEventListener('pointermove', handleMove) //Cuando nos suscribimos a un evento, tenemos que limpiarlo si queremos dejar de estar suscritos
     }
+
+    return () => {
+      window.removeEventListener('pointermove', handleMove)
+    } // Se ejecuta siempre que se desmonte el componente (desaparezca) y cada vez que cambie la dependencia
   }, [enabled])
   return (
     <main>
@@ -33,6 +37,7 @@ function App() {
         </button>
     </main>
   )
+
 }
 
 export default App
