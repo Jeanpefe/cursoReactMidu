@@ -6,6 +6,7 @@ function App() {
   const [position, setPosition] = useState({x: 0, y: 0}) // Como buena practica, inicializar el estado con el tipo de dato que vamos a usar o en su defecto con null
   const [visible, setVisible] = useState(false)
 
+  //Pointer move
   useEffect(() => {
     const handleMove = (event) => {
       const {clientX, clientY} = event
@@ -21,6 +22,16 @@ function App() {
       setVisible(false)
     } // Se ejecuta siempre que se desmonte el componente (desaparezca) y cada vez que cambie la dependencia, antes de ejecutar el efecto de nuevo
     //
+  }, [enabled])
+
+  //Change body className
+  useEffect(() => {
+    console.log(enabled)
+    document.body.classList.toggle('no-cursor', enabled)
+
+    return () => {
+      document.body.classList.remove('no-cursor')
+    }
   }, [enabled])
   return (
     <main>
