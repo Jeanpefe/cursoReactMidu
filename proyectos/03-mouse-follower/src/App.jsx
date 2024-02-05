@@ -4,24 +4,28 @@ function App() {
 
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition] = useState({x: 0, y: 0}) // Como buena practica, inicializar el estado con el tipo de dato que vamos a usar o en su defecto con null
+  const [visible, setVisible] = useState(false)
+
   useEffect(() => {
-    console.log("hola")
     const handleMove = (event) => {
       const {clientX, clientY} = event
       setPosition({x: clientX, y: clientY})
     }
     if (enabled) {
       window.addEventListener('pointermove', handleMove) //Cuando nos suscribimos a un evento, tenemos que limpiarlo si queremos dejar de estar suscritos
+      setVisible(true)
     }
 
     return () => {
       window.removeEventListener('pointermove', handleMove)
-    } // Se ejecuta siempre que se desmonte el componente (desaparezca) y cada vez que cambie la dependencia
+      setVisible(false)
+    } // Se ejecuta siempre que se desmonte el componente (desaparezca) y cada vez que cambie la dependencia, antes de ejecutar el efecto de nuevo
     //
   }, [enabled])
   return (
     <main>
       <div style={{
+        display: visible ? 'block' : 'none',
         position: 'absolute',
         backgroundColor: 'lightcyan',
         borderRadius: '50%',
