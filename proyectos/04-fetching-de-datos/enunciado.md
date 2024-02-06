@@ -27,9 +27,11 @@ Recupera un hecho aleatorio de gatos y muestra una imagen de un gato con la prim
 8. Ponemos
 
 ```js
-import {createRoot} from 'react-dom/client'
+import { createRoot } from "react-dom/client";
 
-const root = createRoot(document.getElementById('app'))
-root.render(<h1>Hola</h1>) 
+const root = createRoot(document.getElementById("app"));
+root.render(<h1>Hola</h1>);
 ```
+
 9. Para que funcione el root.render, cambiamos la extensión de `.js` a `.jsx`, y lo mismo en el script del `main.html`
+10. Instalamos linter `npm install standard -D`
