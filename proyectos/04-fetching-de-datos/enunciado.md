@@ -3,7 +3,9 @@ APIS:
 - Facts Random: https://catfact.ninja/fact
 - Imagen Random: https://cataas.com/cat/says/hello
 
-Recupera un hecho aleatorio de gatos y muestra una imagen de un gato con la primera palabra del hecho.
+Recupera un hecho aleatorio de gatos de la primera api
+Recupera la primera palabra del hecho
+Muestra una imagen de un gato con la primera palabra
 
 ### Inicializar Proyecto con Vite Vanilla
 
