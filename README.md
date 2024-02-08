@@ -12,3 +12,4 @@
     - `[]`: se ejecuta cuando se monta el componente
     - `[params]`: se ejecuta cuando se monta el componente y cuando cambian los params
     - `undefined`: se ejecuta cada vez que se renderiza el componente 
+- Cuando usemos un useEffect, poner `useEffect([])` con el array de dependencias lo primero para no olvidarlo

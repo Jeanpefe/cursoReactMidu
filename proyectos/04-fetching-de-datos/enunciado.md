@@ -7,6 +7,8 @@ Recupera un hecho aleatorio de gatos de la primera api
 Recupera la primera palabra del hecho
 Muestra una imagen de un gato con la primera palabra
 
+- endpoint para obtener la imagen: `https://cataas.com/cat/says/${word}?size=50&color=red&json=true`
+
 ### Inicializar Proyecto con Vite Vanilla
 
 1. `npm create vite@latest`

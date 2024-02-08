@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact'
+// const CAT_ENDPOINT_IMAGE = `https://cataas.com/cat/says/${word}?size=50&color=red&json=true` 
 
 function App() {
-  const [fact, setFact] = useState('cat state')
+  const [fact, setFact] = useState()
 
   useEffect(() => {
-    fetch('https://catfact.ninja/fact')
+    fetch(CAT_ENDPOINT_FACT)
       .then(res => res.json())
       .then(data => setFact(data.fact))
   }, [])
@@ -13,7 +15,7 @@ function App() {
   return (
     <main>
       <h1>Gatos</h1>
-      <p>{fact}</p>
+      {fact && <p>{fact}</p>}
     </main>
   )
 }
