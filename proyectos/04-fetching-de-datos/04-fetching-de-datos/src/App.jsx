@@ -28,7 +28,7 @@ function App() {
     <main>
       <h1>Gatos</h1>
       {fact && <p>{fact}</p>}
-      {}
+      <img>{`https://cataas.com/cat/${setCatId}/says/?fontSize=50&fontColor=red&json=true`}</img>
     </main>
   )
 }
