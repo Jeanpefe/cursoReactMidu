@@ -6,7 +6,7 @@ const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact'
 function App() {
   const [fact, setFact] = useState()
   const [catId, setCatId] = useState()
-
+  
   useEffect(() => {
     fetch(CAT_ENDPOINT_FACT)
       .then(res => res.json())
@@ -14,8 +14,7 @@ function App() {
         const {fact} = data //Desesctructuramos la respuesta y obtenemos la propiedad fact
         setFact(fact)
 
-        const firstWord = fact.split(' ')[0]
-        fetch(`https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=red&json=true`)
+        fetch(`https://cataas.com/cat?json=true`)
         .then(res => res.json())
         .then(resJson => {
           const {_id} = resJson
@@ -28,7 +27,7 @@ function App() {
     <main>
       <h1>Gatos</h1>
       {fact && <p>{fact}</p>}
-      <img>{`https://cataas.com/cat/${setCatId}/says/?fontSize=50&fontColor=red&json=true`}</img>
+      {catId && <img src={`https://cataas.com/cat/${catId}/says/${fact.split(' ')[0]}?fontSize=50&fontColor=red`}/>}
     </main>
   )
 }
