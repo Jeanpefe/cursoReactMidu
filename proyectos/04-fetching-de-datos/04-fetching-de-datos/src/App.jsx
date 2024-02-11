@@ -7,21 +7,26 @@ function App() {
   const [fact, setFact] = useState()
   const [catId, setCatId] = useState()
   
+  // recuperar la cita al cargar la pagina
   useEffect(() => {
     fetch(CAT_ENDPOINT_FACT)
       .then(res => res.json())
       .then(data => {
         const {fact} = data //Desesctructuramos la respuesta y obtenemos la propiedad fact
         setFact(fact)
-
-        fetch(`https://cataas.com/cat?json=true`)
-        .then(res => res.json())
-        .then(resJson => {
-          const {_id} = resJson
-          setCatId(_id)
-        })
       })
   }, [])
+
+  // recuperar la imagen cada vez que tenemos una cita
+  useEffect(() => {
+    if (!fact) return
+    fetch(`https://cataas.com/cat?json=true`)
+    .then(res => res.json())
+    .then(resJson => {
+      const {_id} = resJson
+      setCatId(_id)
+    })
+  },[fact])
 
   return (
     <main>
