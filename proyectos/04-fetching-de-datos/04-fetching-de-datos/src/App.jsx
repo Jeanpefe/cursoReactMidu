@@ -26,8 +26,10 @@ function App() {
   return (
     <main>
       <h1>Gatos</h1>
-      {fact && <p>{fact}</p>}
-      {catId && <img src={`https://cataas.com/cat/${catId}/says/${fact.split(' ')[0]}?fontSize=50&fontColor=red`}/>}
+      <section>
+        {fact && <p>{fact}</p>}
+        {catId && <img src={`https://cataas.com/cat/${catId}/says/${fact.split(' ')[0]}?fontSize=50&fontColor=red`}/>}
+      </section>
     </main>
   )
 }
