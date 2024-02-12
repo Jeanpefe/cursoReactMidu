@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { getRandomFact } from './services/facts'
 import './App.css'
 const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact'
 // const CAT_ENDPOINT_IMAGE = `https://cataas.com/cat/says/${word}?fontSize=50&fontColor=red&json=true` 
@@ -8,13 +9,9 @@ function App() {
   const [catId, setCatId] = useState()
   
   // recuperar la cita al cargar la pagina
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_FACT)
-      .then(res => res.json())
-      .then(data => {
-        const {fact} = data //Desesctructuramos la respuesta y obtenemos la propiedad fact
-        setFact(fact)
-      })
+  useEffect(async () => {
+    const newFact = await getRandomFact()
+    setFact(newFact)
   }, [])
 
   // recuperar la imagen cada vez que tenemos una cita
@@ -28,14 +25,10 @@ function App() {
     })
   },[fact])
 
-  const handleClick = () => {
-    fetch(CAT_ENDPOINT_FACT)
-      .then(res => res.json())
-      .then(data => {
-        const {fact} = data //Desesctructuramos la respuesta y obtenemos la propiedad fact
-        setFact(fact)
-      })
+  const handleClick = async () => {
+    getRandomFact().then(newFact => setFact(newFact)) //Esto es lo mismo que getRandomFact().then(setFact)
   }
+
   return (
     <main>
       <h1>Gatos</h1>
