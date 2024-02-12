@@ -28,10 +28,19 @@ function App() {
     })
   },[fact])
 
+  const handleClick = () => {
+    fetch(CAT_ENDPOINT_FACT)
+      .then(res => res.json())
+      .then(data => {
+        const {fact} = data //Desesctructuramos la respuesta y obtenemos la propiedad fact
+        setFact(fact)
+      })
+  }
   return (
     <main>
       <h1>Gatos</h1>
       <section>
+        <button onClick={handleClick}>Refrescar</button>
         {fact && <p>{fact}</p>}
         {catId && <img src={`https://cataas.com/cat/${catId}/says/${fact.split(' ')[0]}?fontSize=50&fontColor=red`}/>}
       </section>
