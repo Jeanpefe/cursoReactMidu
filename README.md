@@ -13,3 +13,4 @@
     - `[params]`: se ejecuta cuando se monta el componente y cuando cambian los params
     - `undefined`: se ejecuta cada vez que se renderiza el componente 
 - Cuando usemos un useEffect, poner `useEffect([])` con el array de dependencias lo primero para no olvidarlo
+- Cuando hagamos test End to End con playwright, hay que cambiar la extensión de `playwright.config.js` a `playwright.config.cjs` (CommonJS) y cambiar los `require` por `import`
