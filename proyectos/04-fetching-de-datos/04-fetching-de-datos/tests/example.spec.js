@@ -16,3 +16,19 @@ test('app muestra random fact e imagen', async ({ page }) => {
   await expect(textContent?.length).toBeGreaterThan(0)
   await expect(imageSrc?.startsWith(CAT_PREFIX_IMAGE_URL)).toBeTruthy()
 });
+
+test('check button refresh', async ({ page }) => {
+  await page.goto(LOCALHOST_URL);
+
+  const oldText = await page.getByRole('paragraph')
+  const oldTextContent = await oldText.textContent()
+  console.log(oldTextContent)
+
+  const button = await page.getByRole('button')
+  await button.click()
+
+  const newText = await page.getByRole('paragraph')
+  const newTextContent = await newText.textContent()
+  console.log(newTextContent)
+  await expect(oldTextContent).not.toEqual(newTextContent)
+});
