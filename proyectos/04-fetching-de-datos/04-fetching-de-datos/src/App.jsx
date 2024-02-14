@@ -1,6 +1,7 @@
 import './App.css'
 import { useCatImage } from './services/hooks/useCatImage'
 import { useCatFact } from './services/hooks/useCatFact'
+import { Otro } from './components/Otro'
 const CAT_ENDPOINT_FACT = 'https://catfact.ninja/fact'
 // const CAT_ENDPOINT_IMAGE = `https://cataas.com/cat/says/${word}?fontSize=50&fontColor=red&json=true` 
 
