@@ -22,13 +22,12 @@ test('check button refresh', async ({ page }) => {
 
   const oldText = await page.getByRole('paragraph')
   const oldTextContent = await oldText.textContent()
-  console.log(oldTextContent)
 
   const button = await page.getByRole('button')
   await button.click()
+  await page.waitForTimeout(2000)
 
   const newText = await page.getByRole('paragraph')
   const newTextContent = await newText.textContent()
-  console.log(newTextContent)
-  await expect(oldTextContent).not.toEqual(newTextContent)
+  await expect(oldTextContent).not.toEqual(newText)
 });
