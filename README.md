@@ -15,3 +15,4 @@
 - Cuando usemos un useEffect, poner `useEffect([])` con el array de dependencias lo primero para no olvidarlo
 - Cuando hagamos test End to End con playwright, hay que cambiar la extensión de `playwright.config.js` a `playwright.config.cjs` (CommonJS) y cambiar los `require` por `import`
 - Cuando inicialicemos un proyecto y querramos tener algo de estilos por defecto (para prueba técnica p.e) podemos usar estilos de css sin clases, como https://watercss.kognise.dev/. Podemos copiar los estilos de https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css
+- No mostrar las respuestas de las APIs haciendo `console.log`. Mejor hacer la petición desde el navegador/postman y crear una carpeta con ejemplos de respuestas (p.e respuesta ok y respuesta vacía).
