@@ -6,13 +6,21 @@ import { useMovies } from './hooks/useMovies'
 
 function App() {
   const {movies} = useMovies()
+  const inputRef = useRef()
+
+  const handleClick = () => {
+    const inputElem = inputRef.current
+    const value = inputElem.value
+    alert(value)
+  }
+
   return (
     <div className='page'>
       <header>
         <h1>Buscador de peliculas</h1>
         <form className='form'>
-          <input placeholder='Bee Movie' />
-          <button type='submit'>Buscar</button>****
+          <input ref={inputRef} placeholder='Bee Movie' />
+          <button onClick={handleClick} type='submit'>Buscar</button>****
         </form>
       </header>
 
