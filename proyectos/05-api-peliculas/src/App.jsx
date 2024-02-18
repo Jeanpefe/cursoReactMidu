@@ -1,19 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import responseMovies from './mocks/api-results.json'
-import withoutResults from './mocks/api-no-results.json'
 import { Movies } from './components/Movies'
+import { useMovies } from './hooks/useMovies'
 
 function App() {
-  const movies = responseMovies.Search
-
-  const mappedMovies = movies?.map(movie => ({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    poster: movie.Poster
-  }))
-
+  const {movies: mappedMovies} = useMovies()
   return (
     <div className='page'>
       <header>
