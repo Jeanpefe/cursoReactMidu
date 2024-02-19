@@ -9,9 +9,8 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
-    const data = new FormData(event.target) // Objeto con pares key/value que se corresponden con los campos de un formulario
-    const query = data.get('query') // hacemos get de la key 'query', asociada al campo input
-    console.log(query)
+    const fields = Object.fromEntries(new window.FormData(event.target)) //Object.fromEntries convierte los pares key/value en propiedades del objeto
+    console.log(fields)
   }
 
   return (
@@ -20,6 +19,8 @@ function App() {
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
           <input name="query" placeholder='Bee Movie' />
+          <input name="otro" placeholder='Bee Movie' />
+          <input name="another" placeholder='Bee Movie' />
           <button type='submit'>Buscar</button>****
         </form>
       </header>
