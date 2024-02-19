@@ -7,10 +7,11 @@ import { useMovies } from './hooks/useMovies'
 function App() {
   const {movies} = useMovies()
 
+  // Forma no controlada: usando el árbol del DOM y confiando en que están los elementos. Es la más sencilla y más óptima. Normalmente recomendada
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
-    const fields = Object.fromEntries(new window.FormData(event.target)) //Object.fromEntries convierte los pares key/value en propiedades del objeto
-    console.log(fields)
+    const {query} = Object.fromEntries(new window.FormData(event.target)) //Object.fromEntries convierte los pares key/value en propiedades del objeto
+    console.log(query)
   }
 
   return (
@@ -19,8 +20,6 @@ function App() {
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
           <input name="query" placeholder='Bee Movie' />
-          <input name="otro" placeholder='Bee Movie' />
-          <input name="another" placeholder='Bee Movie' />
           <button type='submit'>Buscar</button>****
         </form>
       </header>
