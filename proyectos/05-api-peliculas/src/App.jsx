@@ -6,12 +6,15 @@ import { useMovies } from './hooks/useMovies'
 
 function App() {
   const {movies} = useMovies()
-
-  // Forma no controlada: usando el árbol del DOM y confiando en que están los elementos. Es la más sencilla y más óptima. Normalmente recomendada
+  const [query, setQuery] = useState('')
+  // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
-    const {query} = Object.fromEntries(new window.FormData(event.target)) //Object.fromEntries convierte los pares key/value en propiedades del objeto
-    console.log(query)
+    console.log({query})
+  }
+
+  const handleChange = (event) => {
+    setQuery(event.target.value) // Con el .target accedemos al objetivo del evento
   }
 
   return (
@@ -19,7 +22,7 @@ function App() {
       <header>
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
-          <input name="query" placeholder='Bee Movie' />
+          <input onChange={handleChange} value={query} name="query" placeholder='Bee Movie' />
           <button type='submit'>Buscar</button>****
         </form>
       </header>
