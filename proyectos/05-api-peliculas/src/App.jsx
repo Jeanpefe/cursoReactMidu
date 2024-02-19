@@ -8,9 +8,9 @@ function App() {
   const {movies} = useMovies()
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const data = new FormData(event.target)
-    const query = data.get('query')
+    event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
+    const data = new FormData(event.target) // Objeto con pares key/value que se corresponden con los campos de un formulario
+    const query = data.get('query') // hacemos get de la key 'query', asociada al campo input
     console.log(query)
   }
 
