@@ -9,18 +9,18 @@ function useSearch () {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    setQuery(query) 
-    if (query === '') {
+    updateSearch(search) 
+    if (search === '') {
       setError("No se puede buscar una pelicula vacia")
       return
     }
   
-    if (query.match(/^\d+$/)) {
+    if (search.match(/^\d+$/)) {
       setError('No se puede buscar solo con un numero')
       return
     }
   
-    if (query.length < 4) {
+    if (search.length < 4) {
       setError("Introduce al menos 4 caracteres")
       return
     }
@@ -33,18 +33,18 @@ function useSearch () {
 function App() {
   const {movies} = useMovies()
   const {search, updateSearch, error} = useSearch()
-  
+
   // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
-    console.log({query})
+    console.log({search})
   }
 
   const handleChange = (event) => {
-    const newQuery = event.target.value // Con el .target accedemos al objetivo del evento
+    const newSearch = event.target.value // Con el .target accedemos al objetivo del evento
     //Si no creamos esta variable podemos tener problemas de asincronia
-    if (newQuery.startsWith(' ')) return //Prevalidacion, no deja siquiera escribir espacios en blanco antes de la pelicula
-    setQuery(event.target.value)
+    if (newSearch.startsWith(' ')) return //Prevalidacion, no deja siquiera escribir espacios en blanco antes de la pelicula
+    updateSearch(event.target.value)
   }
 
 
@@ -53,7 +53,7 @@ function App() {
       <header>
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
-          <input onChange={handleChange} value={query} name="query" placeholder='Bee Movie' />
+          <input onChange={handleChange} value={search} name="search" placeholder='Bee Movie' />
           <button type='submit'>Buscar</button>****
         </form>
         {error && <p style={{color: 'red'}}>{error}</p>}
