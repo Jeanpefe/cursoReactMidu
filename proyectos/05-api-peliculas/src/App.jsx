@@ -7,8 +7,14 @@ import { useMovies } from './hooks/useMovies'
 function useSearch () {
   const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
-
+  const isFirstInput = useRef(true) //ejemplo comun de uso de useRef para tener flags
   useEffect(() => {
+
+    if (isFirstInput.current) {
+      isFirstInput.current = search === ''
+      return
+    }
+
     updateSearch(search) 
     if (search === '') {
       setError("No se puede buscar una pelicula vacia")
