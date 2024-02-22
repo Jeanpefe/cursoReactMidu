@@ -37,13 +37,13 @@ function useSearch () {
 }
 
 function App() {
-  const {movies} = useMovies()
   const {search, updateSearch, error} = useSearch()
+  const {movies, getMovies} = useMovies({search})
 
   // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
-    console.log({search})
+    getMovies()
   }
 
   const handleChange = (event) => {
