@@ -53,7 +53,6 @@ function App() {
     updateSearch(event.target.value)
   }
 
-
   return (
     <div className='page'>
       <header>
