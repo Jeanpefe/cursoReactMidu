@@ -37,13 +37,19 @@ function useSearch () {
 }
 
 function App() {
+
+  const [sort, setSort] = useState(false)
   const {search, updateSearch, error} = useSearch()
-  const {movies, loading, getMovies} = useMovies({search})
+  const {movies, loading, getMovies} = useMovies({search, sort})
 
   // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
     getMovies()
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   const handleChange = (event) => {
@@ -59,6 +65,7 @@ function App() {
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
           <input onChange={handleChange} value={search} name="search" placeholder='Bee Movie' />
+          <input type='checkbox' onChange={handleSort} checked={sort}></input>
           <button type='submit'>Buscar</button>****
         </form>
         {error && <p style={{color: 'red'}}>{error}</p>}

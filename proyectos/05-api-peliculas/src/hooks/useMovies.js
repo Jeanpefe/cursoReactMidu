@@ -1,18 +1,15 @@
-import withResults from '../mocks/api-results.json'
-import withoutResults from '../mocks/api-no-results.json'
 import { searchMovies } from '../services/movies'
 
 import { useState, useRef } from 'react'
 
-let previousSearch = '' //Esto funciona porque solo usamos el custom hook una vez, porque la variable se comparte allá donde pongamos el compoennte
-
-export function useMovies ({search}) {
+export function useMovies ({search, sort}) {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const previousSearch = useRef(search)
 
     const getMovies = async () => {
-      if (search == previousSearch) return 
+      if (search == previousSearch.current) return 
 
       try{
         setLoading(true)
@@ -26,5 +23,10 @@ export function useMovies ({search}) {
         setLoading(false)
       }
     } 
-    return {movies, loading, getMovies}
+    console.log(movies)
+    const sortedMovies = sort
+    ? [...movies].sort((a,b) => a.title.localeCompare(b.title)) 
+    : movies 
+
+    return {movies:sortedMovies, loading, getMovies}
   }
