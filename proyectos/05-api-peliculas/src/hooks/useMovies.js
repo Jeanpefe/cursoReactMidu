@@ -9,7 +9,7 @@ export function useMovies ({search, sort}) {
     const previousSearch = useRef(search)
 
     const getMovies = useMemo(() => { 
-      return async () => {
+      return async ({search}) => {
       if (search == previousSearch.current) return 
 
       try{
@@ -24,7 +24,7 @@ export function useMovies ({search, sort}) {
         setLoading(false)
       }
     }
-  }, [search]) //Con esto hacemos que se cree la función solo cuando cambia el search, no cuando se pulsa el checkbox por ejemplo
+  }, []) //Con esto hacemos que se cree la función solo una vez y recibiendo por parametro el search en vez de dependiendo de él
     
     // if (!movies) {
     //   return {movies, loading, getMovies}
