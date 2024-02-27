@@ -54,9 +54,10 @@ function App() {
 
   const handleChange = (event) => {
     const newSearch = event.target.value // Con el .target accedemos al objetivo del evento
-    //Si no creamos esta variable podemos tener problemas de asincronia
     if (newSearch.startsWith(' ')) return //Prevalidacion, no deja siquiera escribir espacios en blanco antes de la pelicula
-    updateSearch(event.target.value)
+    updateSearch(newSearch)
+    getMovies({search: newSearch})
+    //Si no creamos esta variable podemos tener problemas de asincronia
   }
 
   return (
