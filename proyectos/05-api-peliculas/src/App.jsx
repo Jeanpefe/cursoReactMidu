@@ -56,7 +56,7 @@ function App() {
     const newSearch = event.target.value // Con el .target accedemos al objetivo del evento
     if (newSearch.startsWith(' ')) return //Prevalidacion, no deja siquiera escribir espacios en blanco antes de la pelicula
     updateSearch(newSearch)
-    getMovies({search: newSearch})
+    getMovies({search: newSearch}) //Si hacemos esto podemos tener una race condition, es decir, que se ejecuten varios procesos en paralelo (en este caso búsquedas en la api) y no sepamos cual termina primero y por tanto qué datos se van a mostrar (igual se hace antes la query de Aveng que la de Ave)
     //Si no creamos esta variable podemos tener problemas de asincronia
   }
 
