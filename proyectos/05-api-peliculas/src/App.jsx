@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {useRef} from 'react'
+import {useRef, useCallback} from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
@@ -43,10 +43,11 @@ function App() {
   const {search, updateSearch, error} = useSearch()
   const {movies, loading, getMovies} = useMovies({search, sort})
 
-  const debouncedGetMovies = debounce(search => {
+  const debouncedGetMovies = useCallback(debounce(search => {
     console.log('search', search)
     getMovies({search})
-  }, 500) //Si dejamos esto asi, no va a funcionar del todo porque con cada render se va a crear una nueva funcion 
+  }, 300)
+  , [])  // Con esto ya solo se crea una vez. 300ms es tiempo razonable
 
   // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
