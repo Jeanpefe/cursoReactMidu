@@ -3,6 +3,7 @@ import {useRef} from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
+import debounce from 'just-debounce-it'
 
 function useSearch () {
   const [search, updateSearch] = useState('')
@@ -42,6 +43,11 @@ function App() {
   const {search, updateSearch, error} = useSearch()
   const {movies, loading, getMovies} = useMovies({search, sort})
 
+  const debouncedGetMovies = debounce(search => {
+    console.log('search', search)
+    getMovies({search})
+  }, 500) //Si dejamos esto asi, no va a funcionar del todo porque con cada render se va a crear una nueva funcion 
+
   // Forma controlada: cada vez que cambia el texto del input se renderiza todo otra vez, es una forma más lenta. Pero facilita la validación del formulario
   const handleSubmit = (event) => {
     event.preventDefault() //evitar que se envie el formulario de la forma estándar, pudiendo definir logica custom
@@ -56,7 +62,7 @@ function App() {
     const newSearch = event.target.value // Con el .target accedemos al objetivo del evento
     if (newSearch.startsWith(' ')) return //Prevalidacion, no deja siquiera escribir espacios en blanco antes de la pelicula
     updateSearch(newSearch)
-    getMovies({search: newSearch}) //Si hacemos esto podemos tener una race condition, es decir, que se ejecuten varios procesos en paralelo (en este caso búsquedas en la api) y no sepamos cual termina primero y por tanto qué datos se van a mostrar (igual se hace antes la query de Aveng que la de Ave)
+    debouncedGetMovies({search: newSearch}) //Si hacemos esto podemos tener una race condition, es decir, que se ejecuten varios procesos en paralelo (en este caso búsquedas en la api) y no sepamos cual termina primero y por tanto qué datos se van a mostrar (igual se hace antes la query de Aveng que la de Ave)
     //Si no creamos esta variable podemos tener problemas de asincronia
   }
 
