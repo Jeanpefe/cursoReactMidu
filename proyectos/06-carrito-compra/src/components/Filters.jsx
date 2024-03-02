@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useId } from 'react'
 import './Filters.css'
 
 export function Filters ({changeFilters}) {
     const [minPrice, setMinPrice] = useState(0)
-    const [category, setCategory] = useState('all')
+    const minPriceFilterId = useId()
+    const categoryFilterId = useId()
 
     const handleChangeMinPrice = (event) => {
         setMinPrice(event.target.value)
@@ -15,7 +16,6 @@ export function Filters ({changeFilters}) {
 
     const handleChangeCategory = (event) => {
         //estamos pasando la funcion de actualizar estado nativa de React a un componente hijo
-        setCategory(event.target.value)
         changeFilters(prevState => ({
             ...prevState,
             category: event.target.value
@@ -26,10 +26,10 @@ export function Filters ({changeFilters}) {
         <section className="filters">
 
             <div>
-                <label htmlFor="price">Precio mínimo</label>
+                <label htmlFor={minPriceFilterId}>Precio mínimo</label>
                 <input 
                     type='range'
-                    id='price'
+                    id={minPriceFilterId}
                     min='0'
                     max='1000'
                     onChange={handleChangeMinPrice}
@@ -38,8 +38,8 @@ export function Filters ({changeFilters}) {
             </div>
 
             <div>
-                <label htmlFor="category">Categoria</label>
-                <select onChange={handleChangeCategory} id='category' >
+                <label htmlFor={categoryFilterId}>Categoria</label>
+                <select onChange={handleChangeCategory} id={categoryFilterId} >
                     <option value='all'>Todas</option>
                     <option value='laptops'>Portatiles</option>
                     <option value='smartphones'>Móviles</option>
