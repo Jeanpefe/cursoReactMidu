@@ -1,14 +1,17 @@
 import { useState, useId } from 'react'
 import './Filters.css'
+import { useFilters } from '../hooks/useFilters'
 
-export function Filters ({changeFilters}) {
+export function Filters () {
+    const {setFilters} = useFilters()
+
     const [minPrice, setMinPrice] = useState(0)
     const minPriceFilterId = useId()
     const categoryFilterId = useId()
 
     const handleChangeMinPrice = (event) => {
         setMinPrice(event.target.value)
-        changeFilters(prevState => ({
+        setFilters(prevState => ({
             ...prevState,
             minPrice: event.target.value
         }))
@@ -16,7 +19,7 @@ export function Filters ({changeFilters}) {
 
     const handleChangeCategory = (event) => {
         //estamos pasando la funcion de actualizar estado nativa de React a un componente hijo
-        changeFilters(prevState => ({
+        setFilters(prevState => ({
             ...prevState,
             category: event.target.value
         }))
