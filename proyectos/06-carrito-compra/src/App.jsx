@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { useFilters } from './hooks/useFilters'
+import { Cart } from './components/Cart'
 
 function App() {
   const [products] = useState(initalProducts)
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
       <Header />
+      <Cart />
       <Products products={filterProducts(products)}/>
       <Footer filters={filters}/>
     </>
