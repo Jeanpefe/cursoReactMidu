@@ -8,7 +8,7 @@ import { Cart } from './components/Cart'
 
 function App() {
   const [products] = useState(initalProducts)
-  const {filters, filterProducts, setFilters} = useFilters()
+  const {filterProducts, setFilters} = useFilters()
 
   return (
     <>
