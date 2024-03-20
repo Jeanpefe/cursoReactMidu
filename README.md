@@ -5,6 +5,9 @@
 1. X follow cards
 2. Tres en raya
 3. Mouse follower
+4. Fetching de datos
+5. API para buscar peliculas
+6. Carrito de compra 
 
 # Cosas útiles
 
