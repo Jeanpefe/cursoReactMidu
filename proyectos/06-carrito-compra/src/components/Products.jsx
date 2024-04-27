@@ -3,7 +3,7 @@ import { AddToCartIcon } from './icons'
 import { useCart } from '../hooks/useCart'
 
 export function Products ({products}) {
-	const {context} = useCart()
+	const { addToCart } = useCart()
     return (
         <main className='products'>
             <ul>
@@ -17,7 +17,7 @@ export function Products ({products}) {
                             <strong>{product.title}</strong> - €{product.price}
                         </div>
                         <div>
-                            <button>
+                            <button onClick={() => addToCart(product)}>
                                 <AddToCartIcon />  
                             </button>
                         </div>
