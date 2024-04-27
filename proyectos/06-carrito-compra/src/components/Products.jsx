@@ -1,7 +1,9 @@
 import './Products.css'
 import { AddToCartIcon } from './icons'
+import { useCart } from '../hooks/useCart'
 
 export function Products ({products}) {
+	const {context} = useCart()
     return (
         <main className='products'>
             <ul>

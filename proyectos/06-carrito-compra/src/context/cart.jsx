@@ -1,4 +1,3 @@
-import { clear } from "console";
 import { createContext, useState } from "react";
 
 export const CartContext = createContext()
@@ -27,7 +26,7 @@ export function CartProvider ({children}) {
             cart,
             addToCart,
             clearCart
-        }} >
+        }}>
             {children}
         </CartContext.Provider>
     )
