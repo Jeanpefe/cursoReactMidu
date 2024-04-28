@@ -6,7 +6,6 @@ export function CartProvider ({children}) {
     const [cart, setCart] = useState([])
 
     const addToCart = product => {
-		console.log("añadimos")
         // setCart([...cart, product]) // Forma sencilla
         const productInCartIndex = cart.findIndex(item => item.id === product.id)
 		console.log(productInCartIndex)
@@ -21,7 +20,7 @@ export function CartProvider ({children}) {
 			...prevState,
 			{
 				...product,
-				quantity: 1
+				quantity: 1	
 			}
 		]))
     }
