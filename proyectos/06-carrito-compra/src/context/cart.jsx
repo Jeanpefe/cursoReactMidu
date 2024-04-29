@@ -29,8 +29,8 @@ export function CartProvider ({children}) {
         <CartContext.Provider value={{
             cart: state,
             addToCart,
+			removeFromCart,
             clearCart,
-			removeFromCart
         }}>
             {children}
         </CartContext.Provider>

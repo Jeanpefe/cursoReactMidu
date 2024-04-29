@@ -22,6 +22,7 @@ export const cartReducer = (state, action) => {
 				//Structured clone
 				newState = structuredClone(state)
 				newState[productInCartIndex].quantity += 1
+				updateLocalStorage(newState)
 				return newState
 			}
 
@@ -38,12 +39,13 @@ export const cartReducer = (state, action) => {
 		case CART_ACTIONS_TYPES.REMOVE_FROM_CART:
 			const {id} = actionPayload
 			newState = state.filter(item => item.id !== id)
+			updateLocalStorage(newState)
 			return newState
+			
+		case CART_ACTIONS_TYPES.CLEAR_CART: 
+			updateLocalStorage([])
+			return []
 
-		case CART_ACTIONS_TYPES.CLEAR_CART: {
-			updateLocalStorage(initialState)
-			return initialState
-		}
 	}
 	return state
 }
