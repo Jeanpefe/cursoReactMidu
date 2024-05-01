@@ -1,5 +1,12 @@
 
-export const initialState = JSON.parse(window.localStorage.getItem('cart')) || []
+let cart;
+try {
+    cart = JSON.parse(window.localStorage.getItem('cart')) || [];
+} catch (error) {
+    console.error('Error al analizar el JSON del carrito:', error);
+    cart = [];
+}
+export const initialState = cart
 
 export const CART_ACTIONS_TYPES = {
 	ADD_TO_CART: 'ADD_TO_CART',
@@ -19,6 +26,7 @@ export const cartReducer = (state, action) => {
 		case CART_ACTIONS_TYPES.ADD_TO_CART: 
 			const productInCartIndex = state.findIndex(item => item.id === actionPayload.id)
 			if (productInCartIndex >= 0) {
+				//With .map
 				const newState = state.map(item => {
 					if (item.id === actionPayload.id) {
 						return {
@@ -36,14 +44,12 @@ export const cartReducer = (state, action) => {
 				updateLocalStorage(newState)
 				return newState
 			}
-					
-			updateLocalStorage(newState)
+			
+			//With spread operator and slice
 			newState = [
-				...state,
-				{
-					...actionPayload, //product
-					quantity: 1	
-				}
+				...state.slice(0, productInCartIndex),
+				{...state[productInCartIndex], quantity: state[productInCartIndex].quantity + 1},
+				...state.slice(productInCartIndex + 1)
 			]
 			updateLocalStorage(newState)
 			return newState
