@@ -19,11 +19,22 @@ export const cartReducer = (state, action) => {
 		case CART_ACTIONS_TYPES.ADD_TO_CART: 
 			const productInCartIndex = state.findIndex(item => item.id === actionPayload.id)
 			if (productInCartIndex >= 0) {
-				//Structured clone
-				newState = structuredClone(state)
-				newState[productInCartIndex].quantity += 1
-				updateLocalStorage(newState)
-				return newState
+				const newState = state.map(item => {
+					if (item.id === actionPayload.id) {
+						newState = 
+							{
+								...item, 
+								quantity: item.quantity + 1
+							}
+						
+						updateLocalStorage(newState)
+						return newState
+				}})
+				// //Structured clone
+				// newState = structuredClone(state)
+				// newState[productInCartIndex].quantity += 1
+				// updateLocalStorage(newState)
+				// return newState
 			}
 
 			newState = [
