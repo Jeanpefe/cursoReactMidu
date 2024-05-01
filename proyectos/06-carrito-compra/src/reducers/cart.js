@@ -1,12 +1,5 @@
 
-let cart;
-try {
-    cart = JSON.parse(window.localStorage.getItem('cart')) || [];
-} catch (error) {
-    console.error('Error al analizar el JSON del carrito:', error);
-    cart = [];
-}
-export const initialState = cart
+export const initialState = JSON.parse(window.localStorage.getItem('cart')) || []
 
 export const CART_ACTIONS_TYPES = {
 	ADD_TO_CART: 'ADD_TO_CART',
@@ -26,16 +19,22 @@ export const cartReducer = (state, action) => {
 		case CART_ACTIONS_TYPES.ADD_TO_CART: 
 			const productInCartIndex = state.findIndex(item => item.id === actionPayload.id)
 			if (productInCartIndex >= 0) {
+				//With spread operator and slice
+				newState = [
+					...state.slice(0, productInCartIndex),
+					{...state[productInCartIndex], quantity: state[productInCartIndex].quantity + 1},
+					...state.slice(productInCartIndex + 1)
+				]
 				//With .map
-				const newState = state.map(item => {
-					if (item.id === actionPayload.id) {
-						return {
-								...item, 
-								quantity: item.quantity + 1
-							}
-						}
-					return item
-					})
+				// const newState = state.map(item => {
+				// 	if (item.id === actionPayload.id) {
+				// 		return {
+				// 				...item, 
+				// 				quantity: item.quantity + 1
+				// 			}
+				// 		}
+				// 	return item
+				// 	})
 						// //Structured clone
 						// newState = structuredClone(state)
 						// newState[productInCartIndex].quantity += 1
@@ -45,11 +44,12 @@ export const cartReducer = (state, action) => {
 				return newState
 			}
 			
-			//With spread operator and slice
 			newState = [
-				...state.slice(0, productInCartIndex),
-				{...state[productInCartIndex], quantity: state[productInCartIndex].quantity + 1},
-				...state.slice(productInCartIndex + 1)
+				...state,
+				{
+					...actionPayload, //product
+					quantity: 1	
+				}
 			]
 			updateLocalStorage(newState)
 			return newState
