@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const NAVIGATION_EVENT = 'pushstate'
@@ -14,7 +14,7 @@ function HomePage() {
 	return (
 		<>
 		<h1>Home</h1>
-		<a href='/about'>Sobre nosotros</a>
+		<button href='/about'>Sobre nosotros</button>
 		</>
 	)
 }
@@ -23,13 +23,25 @@ function AboutPage() {
 	return (
 		<>
 		<h1>About</h1>
-		<a href='/'>Ir a la home</a>
+		<button href='/'>Ir a la home</button>
 		</>
 	)
 }
 
 function App() {
 	const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+	useEffect(() => {
+		const onLocationChange = () => {
+			setCurrentPath(window.location.pathname)
+
+		window.addEventListener(NAVIGATION_EVENT, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
+
+		return () => { //Función de limpieza
+			window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
+			}
+		}
+	}, [])
 
   return (
 	<main>
