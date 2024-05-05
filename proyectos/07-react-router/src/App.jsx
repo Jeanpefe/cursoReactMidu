@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
+const NAVIGATION_EVENT = 'pushstate'
+
+function navigate(href) {
+	window.history.pushState({}, '', href) //Cambia la url pero sin refrescar la página
+	//crear un evento personalizado para avisar de que hemos cambiado la url
+	const navigationEvent = new Event(NAVIGATION_EVENT)
+	window.dispatchEvent(navigationEvent) //Lo despacha para poder ser escuchado (el evento de modificar la url)
+}
+
 function HomePage() {
 	return (
 		<>
