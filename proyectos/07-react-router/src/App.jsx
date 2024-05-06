@@ -4,7 +4,7 @@ import './App.css'
 const NAVIGATION_EVENT = 'pushstate'
 
 function navigate(href) {
-	console.log(href)
+		console.log(href)
 	window.history.pushState({}, '', href) //Cambia la url pero sin refrescar la página
 	//crear un evento personalizado para avisar de que hemos cambiado la url
 	const navigationEvent = new Event(NAVIGATION_EVENT)
@@ -37,9 +37,11 @@ function App() {
 			setCurrentPath(window.location.pathname)
 		}
 		window.addEventListener(NAVIGATION_EVENT, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
+		window.addEventListener('popstate', onLocationChange) //Escuchar el evento de dar marcha atrás en el navegador. Se puede hacer de forma nativa, no como el pushState
 
 		return () => { //Función de limpieza
 			window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
+			window.removeEventListener('popstate', onLocationChange)
 		}
 
 	}, [])
