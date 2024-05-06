@@ -1,33 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-
-const NAVIGATION_EVENT = 'pushstate'
-
-function navigate(href) {
-		console.log(href)
-	window.history.pushState({}, '', href) //Cambia la url pero sin refrescar la página
-	//crear un evento personalizado para avisar de que hemos cambiado la url
-	const navigationEvent = new Event(NAVIGATION_EVENT)
-	window.dispatchEvent(navigationEvent) //Lo despacha para poder ser escuchado (el evento de modificar la url)
-}
-
-function HomePage() {
-	return (
-		<>
-		<h1>Home</h1>
-		<button onClick={() => navigate('/about')}>Sobre nosotros</button>
-		</>
-	)
-}
-
-function AboutPage() {
-	return (
-		<>
-		<h1>About</h1>
-		<button onClick={() => navigate('/')}>Ir a la home</button>
-		</>
-	)
-}
+import { EVENTS } from '../assets/consts'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 
 function App() {
 	const [currentPath, setCurrentPath] = useState(window.location.pathname)
@@ -36,12 +11,12 @@ function App() {
 		const onLocationChange = () => {
 			setCurrentPath(window.location.pathname)
 		}
-		window.addEventListener(NAVIGATION_EVENT, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
-		window.addEventListener('popstate', onLocationChange) //Escuchar el evento de dar marcha atrás en el navegador. Se puede hacer de forma nativa, no como el pushState
+		window.addEventListener(EVENTS.PUSHSTATE, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
+		window.addEventListener(EVENTS.POPSTATE, onLocationChange) //Escuchar el evento de dar marcha atrás en el navegador. Se puede hacer de forma nativa, no como el pushState
 
 		return () => { //Función de limpieza
-			window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
-			window.removeEventListener('popstate', onLocationChange)
+			window.removeEventListener(EVENTS.PUSHSTATE, onLocationChange)
+			window.removeEventListener(EVENTS.POPSTATE, onLocationChange)
 		}
 
 	}, [])
