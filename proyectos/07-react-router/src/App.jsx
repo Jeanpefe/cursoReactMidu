@@ -4,6 +4,7 @@ import './App.css'
 const NAVIGATION_EVENT = 'pushstate'
 
 function navigate(href) {
+	console.log(href)
 	window.history.pushState({}, '', href) //Cambia la url pero sin refrescar la página
 	//crear un evento personalizado para avisar de que hemos cambiado la url
 	const navigationEvent = new Event(NAVIGATION_EVENT)
@@ -14,7 +15,7 @@ function HomePage() {
 	return (
 		<>
 		<h1>Home</h1>
-		<button href='/about'>Sobre nosotros</button>
+		<button onClick={() => navigate('/about')}>Sobre nosotros</button>
 		</>
 	)
 }
@@ -23,7 +24,7 @@ function AboutPage() {
 	return (
 		<>
 		<h1>About</h1>
-		<button href='/'>Ir a la home</button>
+		<button onClick={() => navigate('/')}>Ir a la home</button>
 		</>
 	)
 }
@@ -34,13 +35,13 @@ function App() {
 	useEffect(() => {
 		const onLocationChange = () => {
 			setCurrentPath(window.location.pathname)
-
+		}
 		window.addEventListener(NAVIGATION_EVENT, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
 
 		return () => { //Función de limpieza
 			window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
-			}
 		}
+
 	}, [])
 
   return (
