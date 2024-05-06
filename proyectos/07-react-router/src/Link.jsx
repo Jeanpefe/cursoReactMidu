@@ -8,7 +8,8 @@ export function navigate(href) {
 }
 
 export function Link ({target, to, ...props}) {
-    const handleClick = () => {
+    const handleClick = (event) => {
+        event.preventDefault() //PreventDefault para evitar el comportamiento por defecto y que se renderice la nueva url en vez de funcionar como un SPA
         navigate(to)
     }
     return <a onClick={handleClick} href={to} target={target} {...props} />
