@@ -7,3 +7,9 @@ export function navigate(href) {
 	window.dispatchEvent(navigationEvent) //Lo despacha para poder ser escuchado (el evento de modificar la url)
 }
 
+export function Link ({target, to, ...props}) {
+    const handleClick = () => {
+        navigate(to)
+    }
+    return <a onClick={handleClick} href={to} target={target} {...props} />
+}
