@@ -9,8 +9,15 @@ export function navigate(href) {
 
 export function Link ({target, to, ...props}) {
     const handleClick = (event) => {
-        event.preventDefault() //PreventDefault para evitar el comportamiento por defecto y que se renderice la nueva url en vez de funcionar como un SPA
-        navigate(to)
+        
+        const isMainEvent = event.button === 0 //primary click (izquierdo o derecho del ratón según preferencia)
+        const isModifiedEvent = event.metaKey || event.altKey || event.ctrlKey || event.shiftKey
+        const isManageableEvent = target === undefined || target === '_self'
+        
+        if (isMainEvent && isManageableEvent && !isModifiedEvent) {
+            event.preventDefault() //PreventDefault para evitar el comportamiento por defecto (ir a la página) y que se renderice la nueva url en vez de funcionar como un SPA
+            navigate(to)
+        } 
     }
     return <a onClick={handleClick} href={to} target={target} {...props} />
 }
