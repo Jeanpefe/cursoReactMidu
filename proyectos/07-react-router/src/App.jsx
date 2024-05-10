@@ -12,8 +12,7 @@ const routes = [
 	{
 		path: '/about',
 		Component: AboutPage
-	},
-	
+	}
 ]
 
 function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
@@ -32,8 +31,8 @@ function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>40
 		}
 
 	}, [])
-
-	const PageToRender = routes.find(({path}) => path === currentPath)?.Component
+	console.log(currentPath)
+	const PageToRender = routes.find(({path}) => path === currentPath)?.Component //CurrentPath es el path de destino, al que todavía no hemos ido
 	return PageToRender ? <PageToRender /> : <DefaultComponent />
 }
 
@@ -42,6 +41,16 @@ function App() {
 
   return (
 	<main>
+		<Router routes={[
+		{
+			path: '/',
+			Component: HomePage
+		},
+		{
+			path: '/about',
+			Component: AboutPage
+		}
+		]} />
 	</main>
   )
 }
