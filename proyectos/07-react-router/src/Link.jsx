@@ -15,7 +15,7 @@ export function Link ({target, to, ...props}) {
         const isManageableEvent = target === undefined || target === '_self'
         
         if (isMainEvent && isManageableEvent && !isModifiedEvent) {
-            event.preventDefault() //PreventDefault para evitar el comportamiento por defecto (ir a la página) y que se renderice la nueva url en vez de funcionar como un SPA
+            event.preventDefault() //PreventDefaultddddd para evitar el comportamiento por defecto (ir a la página) y que se renderice la nueva url en vez de funcionar como un SPA
             navigate(to)
         } 
     }

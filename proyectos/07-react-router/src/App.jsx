@@ -4,7 +4,19 @@ import { EVENTS } from '../assets/consts'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 
-function App() {
+const routes = [
+	{
+		path: '/',
+		Component: HomePage
+	},
+	{
+		path: '/about',
+		Component: AboutPage
+	},
+	
+]
+
+function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
 	const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
 	useEffect(() => {
@@ -21,10 +33,15 @@ function App() {
 
 	}, [])
 
+	const PageToRender = routes.find(({path}) => path === currentPath)?.Component
+	return PageToRender ? <PageToRender /> : <DefaultComponent />
+}
+
+function App() {
+
+
   return (
 	<main>
-		{currentPath === '/' && <HomePage />}
-		{currentPath === '/about' && <AboutPage />}
 	</main>
   )
 }
