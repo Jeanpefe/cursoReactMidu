@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { EVENTS } from "../assets/consts"
 
-export function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) {
+export function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) { //El defaultComponent es la página a lo que se muestra si vamos a una ruta que no existe
 	const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
 	useEffect(() => {
