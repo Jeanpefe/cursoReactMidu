@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import { Router } from './Router'
 import { Page404 } from './pages/404'
+import { SearchPage } from './pages/SearchPage'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
 		},
 		{
 			path: '/search/:query',
-			Component: ({routeParams}) => <h1>Has buscado {routeParams.query}</h1>
+			Component: SearchPage
 		}
 		]} defaultComponent={Page404}/>
 	</main>
