@@ -6,7 +6,7 @@
  -[x] Crear componente Router para hacerlo más declarativo
  -[x] Soportar ruta por defecto (404)
  -[x] Soportar rutas con parámetros
- -[ ] Componente para hacerlo declarativo
+ -[x] Componente <Route/> para hacerlo declarativo
  -[ ] Lazy Loading de las rutas
  -[ ] Hacer un i18n con las rutas
  -[ ] Testing

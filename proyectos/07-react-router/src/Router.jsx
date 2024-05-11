@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, Children } from "react"
 import { EVENTS } from "../assets/consts"
 import { match } from "path-to-regexp"
 
-export function Router ({routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) { //El defaultComponent es la página a lo que se muestra si vamos a una ruta que no existe
+export function Router ({children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) { //El defaultComponent es la página a lo que se muestra si vamos a una ruta que no existe
 	const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
 	useEffect(() => {
@@ -21,8 +21,16 @@ export function Router ({routes = [], defaultComponent: DefaultComponent = () =>
 	console.log(currentPath)
 
 	let routeParams = {}
-	
-	const PageToRender = routes.find(({path}) => {
+	//add routes from children <Route /> components
+	const routesFromChildren = Children.map(children, ({props, type}) => { //Children es nativo de react, hay que importarlo. Permite iterar, contar, ...
+		const { name } = type
+		const isRoute = name === 'Route'
+		return isRoute ? props : null //en las props está el path y el component
+	})
+
+	const routesToUse = routes.concat(routesFromChildren)
+
+	const PageToRender = routesToUse.find(({path}) => {
 		if (path === currentPath) return true
 		
 		//hemos usado path-to-regexp para detectar rutas dinámicas
@@ -30,7 +38,7 @@ export function Router ({routes = [], defaultComponent: DefaultComponent = () =>
 		///search/:query <- :query es una ruta dinamica 
 
 		const matcherUrl = match(path, {decode: decodeURIComponent}) //La función match devuelve una función que nos permite ver si la ruta matchea con lo que pasamos. Con el decode decodificamos parámetros tipo espacios vacios.
-		const matched = matcherUrl(currentPath)
+		const matched = matcherUrl(currentPath) // /search/js matchea con /search/:query
 		if (!matched) return false
 		
 		//guardar los parametros de la url que eran dinamicos.
