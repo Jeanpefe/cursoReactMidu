@@ -1,6 +1,8 @@
 import {describe, it, expect, beforeEach, vi} from 'vitest'
-import {render, screen, cleanup} from '@testing-library/react'
+import {render, screen, cleanup, fireEvent, waitFor} from '@testing-library/react'
 import { Router } from './Router'
+import { Link } from './Link'
+import { Route } from './Route'
 import { getCurrentPath } from './utils'
 
 vi.mock('./utils.js', () => ({
@@ -36,5 +38,32 @@ describe('Router', () => {
         ]
         render(<Router routes={routes}/>)
         expect(screen.getByText('About')).toBeTruthy()
+    })
+    it('should navigate using Links', async () => {
+        getCurrentPath.mockReturnValueOnce('/') //mockeamos el resultado sólo una vez porque sino tenemos problema con la ruta después
+
+        render(
+            <Router>
+                <Route 
+                    path='/' Component={() => {
+                        return (
+                            <>
+                                <h1>Home</h1>
+                                <Link to='/about'>Go to About</Link>
+                            </>
+                        )
+                    }}
+                />
+                <Route path='/about' Component={() => <h1>About</h1>}/>
+            </Router>
+        )
+
+        //Click en el link
+        console.log(screen.debug()) 
+        const button = screen.getByText(/About/) //podemos hacer match exacto con el texto o usar regex como /About/
+        fireEvent.click(button)
+
+        const aboutTitle = await screen.findByText('About')
+        expect(aboutTitle).toBeTruthy()
     })
 })
