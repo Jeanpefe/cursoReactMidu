@@ -1,13 +1,14 @@
 import { useState, useEffect, Children } from "react"
 import { EVENTS } from "../assets/consts"
 import { match } from "path-to-regexp"
+import { getCurrentPath } from "./utils"
 
 export function Router ({children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1>}) { //El defaultComponent es la página a lo que se muestra si vamos a una ruta que no existe
-	const [currentPath, setCurrentPath] = useState(window.location.pathname)
+	const [currentPath, setCurrentPath] = useState(getCurrentPath())
 
 	useEffect(() => {
 		const onLocationChange = () => {
-			setCurrentPath(window.location.pathname)
+			setCurrentPath(getCurrentPath())
 		}
 		window.addEventListener(EVENTS.PUSHSTATE, onLocationChange) //Cada vez que se dispare el evento NAVIGATION_EVENT se ejecuta la función
 		window.addEventListener(EVENTS.POPSTATE, onLocationChange) //Escuchar el evento de dar marcha atrás en el navegador. Se puede hacer de forma nativa, no como el pushState
