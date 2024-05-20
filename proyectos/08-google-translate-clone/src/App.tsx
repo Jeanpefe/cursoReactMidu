@@ -1,33 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css';
+import { useReducer } from 'react';
+
+//Mirar el readme para ver una imagen representativa
+//1. Create an initialState
+const initalState = {
+  fromLanguage: 'auto',
+  toLanguage: 'en',
+  fromText: '',
+  result: '',
+  loading: false
+}
+
+//2. Create a reducer
+function reducer(state, action) {
+  const { type, payload } = action //Sacamos del action la propiedad type
+
+  if (type === 'INTERCHANGE_LANGUAGE') {
+    return {
+      ...state,
+      fromLanguage: state.toLanguage,
+      toLanguage: state.fromLanguage,
+    }
+  }
+
+  if (type === 'SET_FROM_LANGUAGE') {
+    return {
+      ...state,
+      fromLanguage: payload
+    }
+  }
+
+  if (type === 'SET_TO_LANGUAGE') {
+    return {
+      ...state,
+      toLanguage: payload
+    }
+  }
+
+  if (type === 'SET_FROM_TEXT') {
+    return {
+      ...state,
+      loading: true,
+      fromText: payload,
+      result: ''
+    }
+  }
+
+  if (type === 'SET_RESULT') {
+    return {
+      ...state,
+      loading: false,
+      result: payload
+    }
+  }
+
+  return state
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [state, dispatch] = useReducer(reducer, initalState)
   return (
+    //usar el hook useReducer
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='App'>
+        <h1>Google translate</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
