@@ -11,8 +11,5 @@
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.17",
     "standard": "^17.1.0"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
