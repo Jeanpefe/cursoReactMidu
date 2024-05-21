@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import { useReducer } from 'react';
-import { type State } from './types';
+import { Action, type State } from './types';
 
 //Mirar el readme para ver una imagen representativa
 //1. Create an initialState
@@ -14,10 +14,10 @@ const initalState: State = {
 }
 
 //2. Create a reducer
-function reducer(state: State, action) {
-  const { type, payload } = action //Sacamos del action la propiedad type
+function reducer(state: State, action: Action) {
+  const { type } = action //Sacamos del action la propiedad type
 
-  if (type === 'INTERCHANGE_LANGUAGE') {
+  if (type === 'INTERCHANGE_LANGUAGES') {
     return {
       ...state,
       fromLanguage: state.toLanguage,
@@ -28,14 +28,14 @@ function reducer(state: State, action) {
   if (type === 'SET_FROM_LANGUAGE') {
     return {
       ...state,
-      fromLanguage: payload
+      fromLanguage: action.payload
     }
   }
 
   if (type === 'SET_TO_LANGUAGE') {
     return {
       ...state,
-      toLanguage: payload
+      toLanguage: action.payload
     }
   }
 
@@ -43,7 +43,7 @@ function reducer(state: State, action) {
     return {
       ...state,
       loading: true,
-      fromText: payload,
+      fromText: action.payload,
       result: ''
     }
   }
@@ -52,7 +52,7 @@ function reducer(state: State, action) {
     return {
       ...state,
       loading: false,
-      result: payload
+      result: action.payload
     }
   }
 
