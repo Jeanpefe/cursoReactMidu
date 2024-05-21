@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import { useReducer } from 'react';
+import { type State } from './types';
 
 //Mirar el readme para ver una imagen representativa
 //1. Create an initialState
-const initalState = {
+const initalState: State = {
   fromLanguage: 'auto',
   toLanguage: 'en',
   fromText: '',
@@ -13,7 +14,7 @@ const initalState = {
 }
 
 //2. Create a reducer
-function reducer(state, action) {
+function reducer(state: State, action) {
   const { type, payload } = action //Sacamos del action la propiedad type
 
   if (type === 'INTERCHANGE_LANGUAGE') {
