@@ -1,4 +1,7 @@
 //es .d porque únicamente son definiciones, no hay nada de TS
+import {type SUPPORTED_LANGUAGES} from 'constants'
+
+export type Language = keyof typeof SUPPORTED_LANGUAGES
 
 export interface State {
     fromLanguage: string
