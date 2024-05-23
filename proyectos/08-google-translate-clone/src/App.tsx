@@ -4,9 +4,10 @@ import { useStore } from './hooks/useStore';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { AUTO_LANGUAGE } from './constants';
 import { ArrowIcon } from './components/Icons';
+import { LanguageSelector } from './components/LanguageSelector';
 
 function App() {
-  const { fromLanguage, toLanguage, setFromLanguage, interchangeLanguages } = useStore()
+  const { fromLanguage, toLanguage, setFromLanguage, setToLanguage, interchangeLanguages } = useStore()
 
   return (
     //usar el hook useReducer
@@ -16,7 +17,7 @@ function App() {
 
         <Row>
           <Col>
-            <h2>From</h2>
+            <LanguageSelector onChange={setFromLanguage} />
             {fromLanguage}
           </Col>
           <Col>
@@ -25,7 +26,7 @@ function App() {
             </Button>
           </Col>
           <Col>
-            <h2>To</h2>
+            <LanguageSelector onChange={setToLanguage} />
             {toLanguage}
           </Col>
         </Row>
