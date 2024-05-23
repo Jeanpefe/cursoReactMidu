@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { Action, type State } from '../types';
+import { Action, FromLanguage, Language, type State } from '../types';
 
 //Mirar el readme para ver una imagen representativa
 //1. Create an initialState
@@ -68,10 +68,10 @@ const initalState: State = {
 
     //No es buena práctica devolver el dispatch por si en algún momento se cambia a usar zustand, redux, ... Los componentes no deben saber lo que hay por detrás
       const interchangeLanguages = () => dispatch({type: 'INTERCHANGE_LANGUAGES'})
-      const setFromLanguage = (payload: string) => dispatch({type: 'SET_FROM_LANGUAGE', payload: payload})
-      const setToLanguage = (payload: string) => dispatch({type: 'SET_TO_LANGUAGE', payload: payload})
-      const setFromText = (payload: string) => dispatch({type: 'SET_FROM_TEXT', payload: payload})
-      const setResult = (payload: string) => dispatch({type: 'SET_RESULT', payload: payload})
+      const setFromLanguage = (payload:FromLanguage) => dispatch({type: 'SET_FROM_LANGUAGE', payload: payload})
+      const setToLanguage = (payload: Language) => dispatch({type: 'SET_TO_LANGUAGE', payload: payload})
+      const setFromText = (payload:string) => dispatch({type: 'SET_FROM_TEXT', payload: payload})
+      const setResult = (payload:string) => dispatch({type: 'SET_RESULT', payload: payload})
 
 
       return { 
