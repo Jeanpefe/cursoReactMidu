@@ -27,7 +27,6 @@ function App() {
 				<TextArea
 					type={SectionType.From}
 					value={fromText}
-					placeholder='Introducir texto'
 					onChange={setFromText}
 				/>
 			</Stack>
@@ -48,7 +47,6 @@ function App() {
 				<TextArea
 					type={SectionType.To}
 					value={result}
-					placeholder='Traducción'
 					onChange={setResult}
 				/>
 		  	</Stack>
