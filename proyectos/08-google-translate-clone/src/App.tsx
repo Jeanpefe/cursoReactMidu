@@ -6,9 +6,10 @@ import { AUTO_LANGUAGE } from './constants';
 import { ArrowIcon } from './components/Icons';
 import { LanguageSelector } from './components/LanguageSelector';
 import { SectionType } from './types.d';
+import TextArea from './components/TextArea';
 
 function App() {
-  const { fromLanguage, toLanguage, setFromLanguage, setToLanguage, interchangeLanguages } = useStore()
+  const { fromLanguage, toLanguage, fromText, result, setFromLanguage, setToLanguage, interchangeLanguages, setFromText, setResult } = useStore()
 
   return (
     //usar el hook useReducer
@@ -20,14 +21,14 @@ function App() {
           <Col>
 			<Stack gap={2}>
 				<LanguageSelector 
-				type={SectionType.From}
-				value={fromLanguage}
-				onChange={setFromLanguage} />
-				<Form.Control 
-				as='textarea'
-				placeholder='Introducir texto'
-				autoFocus
-				style={{height: '180px'}}
+					type={SectionType.From}
+					value={fromLanguage}
+					onChange={setFromLanguage} />
+				<TextArea
+					type={SectionType.From}
+					value={fromText}
+					placeholder='Introducir texto'
+					onChange={setFromText}
 				/>
 			</Stack>
           </Col>
@@ -41,13 +42,14 @@ function App() {
           <Col>
 			<Stack gap={2}>
 				<LanguageSelector 
-				type={SectionType.To}
-				value={toLanguage}
-				onChange={setToLanguage} />
-				<Form.Control 
-				as='textarea'
-				placeholder='Traducción'
-				style={{height: '180px'}}
+					type={SectionType.To}
+					value={toLanguage}
+					onChange={setToLanguage} />
+				<TextArea
+					type={SectionType.To}
+					value={result}
+					placeholder='Traducción'
+					onChange={setResult}
 				/>
 		  	</Stack>
           </Col>
