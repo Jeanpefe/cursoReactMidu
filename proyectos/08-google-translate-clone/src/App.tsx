@@ -9,7 +9,7 @@ import { SectionType } from './types.d';
 import TextArea from './components/TextArea';
 
 function App() {
-  const { fromLanguage, toLanguage, fromText, result, setFromLanguage, setToLanguage, interchangeLanguages, setFromText, setResult } = useStore()
+  const { loading, fromLanguage, toLanguage, fromText, result, setFromLanguage, setToLanguage, interchangeLanguages, setFromText, setResult } = useStore()
 
   return (
     //usar el hook useReducer
@@ -45,6 +45,7 @@ function App() {
 					value={toLanguage}
 					onChange={setToLanguage} />
 				<TextArea
+					loading={loading}
 					type={SectionType.To}
 					value={result}
 					onChange={setResult}

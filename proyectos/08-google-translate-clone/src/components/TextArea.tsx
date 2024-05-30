@@ -23,11 +23,12 @@ export default function TextArea ({type, loading, value, onChange}: Props) {
 	? commonStyles
 	: {...commonStyles, backgroundColor: "#f5f5f5"}
 
-	const placeholder = type === SectionType.From
-	? 'Introducir texto'
-	: 'Traducción'
+	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		onChange(event.target.value)
+	}
 	return (
 		<Form.Control 
+			onChange={handleChange}
 			as='textarea'
 			placeholder={getPlaceholder({type, loading})}
 			autoFocus={type === SectionType.From}
