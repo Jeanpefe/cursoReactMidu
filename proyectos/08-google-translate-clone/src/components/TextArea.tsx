@@ -31,6 +31,7 @@ export default function TextArea ({type, loading, value, onChange}: Props) {
 			onChange={handleChange}
 			as='textarea'
 			placeholder={getPlaceholder({type, loading})}
+			disabled={type === SectionType.To}
 			autoFocus={type === SectionType.From}
 			style={styles}
 			value={value}
